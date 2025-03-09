@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "bierner.markdown-mermaid",
     "denoland.vscode-deno",
     "editorconfig.editorconfig",
     "streetsidesoftware.code-spell-checker"

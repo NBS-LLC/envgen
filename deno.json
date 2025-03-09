@@ -1,4 +1,7 @@
 {
+  "fmt": {
+    "lineWidth": 120
+  },
   "tasks": {
     "dev": "deno run --watch main.ts"
   }
