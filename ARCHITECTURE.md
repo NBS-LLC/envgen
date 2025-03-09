@@ -1,8 +1,68 @@
 # Architecture & Design
 
+## Architecture
+
+### Command Line Tool
+
+- default arch is linux/amd64, can be cross-compiled
+- standard library code only
+- silent output unless there's an error
+- standard error is only used for errors
+- standard output is only used when the verbose flag is set
+
+### YAML Configuration File
+
+#### Schema
+
+```yaml
+stackVariables:
+  - keyName: string
+    defaultUnresolvedValue: string
+    resolverName: string
+    excludedStacks:
+      - string
+    stacks:
+      - name: string
+        unresolvedValue: string
+```
+
+#### Example
+
+```yaml
+stackVariables:
+  - keyName: API_KEY
+    defaultUnresolvedValue: "arn:aws:secretsmanager:region:qa:api-key"
+    resolverName: AwsSecret
+    excludedStacks:
+      - development
+    stacks:
+      - name: staging
+        unresolvedValue: "arn:aws:secretsmanager:region:staging:api-key"
+      - name: production
+        unresolvedValue: "arn:aws:secretsmanager:region:production:api-key"
+
+  - keyName: DATABASE_URL
+    resolverName: Plaintext
+    stacks:
+      - name: development
+        unresolvedValue: "localhost:5532"
+      - name: qa1
+        unresolvedValue: "qa1-db:5432"
+      - name: qa2
+        unresolvedValue: "qa2-db:5432"
+      - name: staging
+        unresolvedValue: "staging-db:5432"
+      - name: production
+        unresolvedValue: "prod-db:5432"
+
+  - keyName: LOG_LEVEL
+    defaultUnresolvedValue: "INFO"
+    resolverName: Plaintext
+```
+
 ## Design
 
-- cross-compiled command line app
+- cross-compiled command line tool
 - output is a dotenv formatted file
   - **NEVER committed**
   - key, value pairs
