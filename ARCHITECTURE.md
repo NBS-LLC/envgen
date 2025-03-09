@@ -62,17 +62,17 @@ stackVariables:
 
 ## Design
 
-- cross-compiled command line tool
-- output is a dotenv formatted file
-  - **NEVER committed**
-  - key, value pairs
-  - values are resolved, plaintext strings
 - uses a YAML configuration file to generate the dotenv file's key, value pairs
   - should be committed
   - plaintext values (non-secrets)
   - encrypted values (secrets)
   - defaults
   - exclusions
+
+- output is a dotenv formatted file
+  - **NEVER committed**
+  - key, value pairs
+  - values are resolved, plaintext strings
 
 ### Classes
 
